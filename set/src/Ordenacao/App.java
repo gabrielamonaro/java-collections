@@ -1,33 +1,61 @@
 package Ordenacao;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
 public class App {
     public static void main(String[] args) {
-        
+
+        Set<Serie> minhasSeries = new HashSet<>(){{
+            add(new Serie("got", "fantasia", 60));
+            add(new Serie("dark", "drama", 60));
+            add(new Serie("that '70s show", "comédia", 25));
+        }};
+
+        System.out.println("--- Ordem aleatória: ---");
+        for(Serie serie: minhasSeries)
+        {
+            System.out.println(serie.getNome() +
+             " - " + serie.getGenero() + 
+             "-" + serie.getTempoEpisodio());
+        }
+
+
     System.out.println("--- Ordem de inserção: ---");
-    // System.out.println(meusGatos);
-
-    System.out.println("--- Ordem aleatória: ---");
-    // Collections.shuffle(meusGatos);
-    // System.out.println(meusGatos);
-
-    System.out.println("--- Ordem natural: (nome) ---");
-    // Collections.sort(meusGatos);
-    // System.out.println(meusGatos);
-
-    System.out.println("--- Ordem (idade) ---");
-    // //Collections.sort(meusGatos, new ComparatorIdade());
-    // meusGatos.sort(new ComparatorIdade());
-    // System.out.println(meusGatos);
     
-    System.out.println("--- Ordem (cor) ---");
-    // //Collections.sort(meusGatos, new ComparatorCor());
-    // meusGatos.sort(new ComparatorCor());
-    // System.out.println(meusGatos);
+    Set<Serie> minhasSeries1 = new LinkedHashSet<>(){{
+        add(new Serie("got", "fantasia", 60));
+        add(new Serie("dark", "drama", 60));
+        add(new Serie("that '70s show", "comédia", 25));
+    }};
+    for(Serie serie: minhasSeries1)
+    {
+        System.out.println(serie.getNome() +
+         " - " + serie.getGenero() + 
+         "-" + serie.getTempoEpisodio());
+    }
+    
 
-    System.out.println("--- Ordem (Nome/Cor/Idade) ---");
-    // Collections.sort(meusGatos, new ComparatorNomeCorIdade());
-    // meusGatos.sort(new ComparatorNomeCorIdade());
-    // System.out.println(meusGatos);
+
+
+    System.out.println("--- Ordem natural: (TempoEpisodio) ---");
+    Set<Serie> minhasSeries2 = new TreeSet<>(minhasSeries1);
+    System.out.println(minhasSeries2);
+ 
+
+
+    System.out.println("--- Ordem (Nome/Genero/TempoEpisodio) ---");
+    Set<Serie> minhasSeries3 = new TreeSet<>(new ComparatorNomeGeneroTempoEpisodio());
+    minhasSeries3.addAll(minhasSeries);
+    System.out.println(minhasSeries3);
+
+    
+
+
+
+
 
     }
 }

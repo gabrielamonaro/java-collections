@@ -2,12 +2,12 @@ package Ordenacao;
 
 import java.util.Objects;
 
-public class Serie {
+public class Serie implements Comparable<Serie>{
     private String nome;
     private String genero;
-    private String tempoEpisodio;
+    private Integer tempoEpisodio;
 
-    Serie(String nome, String genero, String tempoEpisodio)
+    Serie(String nome, String genero, int tempoEpisodio)
     {
         this.genero = genero;
         this.nome = nome;
@@ -22,7 +22,7 @@ public class Serie {
         return nome;
     }
 
-    public String getTempoEpisodio() {
+    public int getTempoEpisodio() {
         return tempoEpisodio;
     }
 
@@ -37,7 +37,7 @@ public class Serie {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if(obj == null ||getClass() != obj.getClass()) return false;
+        if(obj == null || getClass() != obj.getClass()) return false;
         Serie serie = (Serie) obj;
         return nome.equals(serie.nome) && genero.equals(serie.genero) && tempoEpisodio.equals(serie.tempoEpisodio); 
     }
@@ -45,5 +45,15 @@ public class Serie {
     @Override
     public int hashCode() {
         return Objects.hash(nome, genero, tempoEpisodio);
+    }
+
+    @Override
+    public int compareTo(Serie serie) {
+        
+            int tempoEpisodio = Integer.compare(this.getTempoEpisodio(), serie.getTempoEpisodio());
+            int genero = this.getGenero().compareToIgnoreCase(serie.getGenero());
+            if (tempoEpisodio != 0 ) return tempoEpisodio;
+            return genero;
+
     }
 }
